@@ -1,8 +1,10 @@
 #include <stdio.h>
-#include "text_test.h"
+#include "test.h"
 
 int main(int argv, char** argc) {
-    num a=1;
+    num a;
+
+    a = sum(100);
     
     printf("hello world!! %d",a);
 
