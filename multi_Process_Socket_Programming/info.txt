@@ -1,0 +1,66 @@
+이 폴더는 클라이언트-서버간 계산기 프로젝트입니다.
+이 프로젝트를 통해서 소켓 프로그래밍을 더 자세히 이해하고자 합니다.
+
+/calcser : 직렬 변환기/역직렬 변환기 라이브러리로, 직렬화/역직렬화 관련 소스 파일을 포함합니다. 
+            이 라이브러리는 계산기 클라이언트와 계산기 서버 사이에 정의된 응용 프로토콜입니다.
+            libcalcser.a라는 정적 라이브러리 파일로 빌드됩니다.
+/calcsvc : 계산기 서비스에 대한 소스를 포함합니다. 이 라이브러리는 libcalcsvc.a라는 정적 라이브러리 파일로 빌드됩니다.
+
+/server/srvcore : 이 라이브러리는 소켓 유형과 상관없이 스트림 및 데이터그램 서버 프로세스 사이에서 공통인 소스를 포함합니다.
+            이 라이브러리의 최종 출력은 libsrvcore.a라는 정적라이브러리입니다.
+/server/unix/stream : 이 라이브러리는 UDS에 연결된 스트림 채널을 사용하는 서버 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 unix_stream_calc_server라는 실행파일입니다.
+/server/unix/datagram : 이 경로는 UDS에 연결된 데이터그램 채널을 사용하는 서버 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 unix_datagram_calc_server라는 실행파일입니다.
+/server/tcp : 이 경로는 TCP네트워크 소켓에 연결된 스트림 채널을 사용하는 서버 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 tcp_calc_server라는 실행 파일입니다.
+/server/udp : 이 경로는 UDP네트워크 소켓에 연결된 스트림 채널을 사용하는 서버 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 udp_calc_server라는 실행 파일입니다.
+
+/client/clicore : 이 라이브러리는 소켓 유형과 상관없이 스트림 및 데이터그램 클라이언트 프로세스 사이에서 공통인 소스를 포함합니다.
+            이 라이브러리의 최종 출력은 libclicore.a라는 정적라이브러리입니다.
+/client/unix/stream : 이 라이브러리는 UDS에 연결된 스트림 채널을 사용하는 클라이언트 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 unix_stream_calc_client 라는 실행파일입니다.
+/client/unix/datagram : 이 라이브러리는 UDS에 연결된 데이터그램 채널을 사용하는 클라이언트 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 unix_datagram_calc_client 라는 실행파일입니다.
+/client/tcp : 이 경로는 TCP네트워크 소켓에 연결된 스트림 채널을 사용하는 클라이언트 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 tcp_calc_client 라는 실행 파일입니다.
+/client/udp : 이 경로는 UDP네트워크 소켓에 연결된 스트림 채널을 사용하는 클라이언트 프로그램에 대한 소스를 포함합니다.
+            이 디렉터리를 최종 빌드한 결과물은 udp_calc_client 라는 실행 파일입니다.
+
+
+- 프로젝트 빌드
+
+위 프로젝트 파일이 있는 루트 디렉터리에서
+$ mkdir -p build
+$ cd build
+$ cmake ..
+...
+$ make
+...
+$
+
+- 리스너(서버) 프로세스 실행
+$ ./server/unix/stream/unix_stream_calc_server
+... (서버 실행중)
+
+- 클라이언트 프로세스 실행(다른 터미널에서)
+$ ./client/unix/stream/unix_stream_calc_client
+? (type quit to exit) 3++4
+The req(0) is sent.
+req(0) > status: OK, result: 7.000000
+? (type quit to exit) mem
+The req(1) is sent.
+req(1) > status: OK, result: 7.000000
+? (type quit to exit) 5++4
+The req(2) is sent.
+req(2) > status: OK, result: 16.000000
+? (type quit to exit) quit
+Bye.
+$
+
+- 참고사항
+컴파일하기 위해서 cmocka.h 를 추가로 빌드해야 될 수 있습니다.
+
+
+
