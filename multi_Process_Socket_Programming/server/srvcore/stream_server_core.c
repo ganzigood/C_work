@@ -27,7 +27,7 @@ void stream_write_resp(
     fprintf(stderr, "Internal error while serializing response\n");
     exit(1);
   }
-  int ret = write(context->addr->sd, buf.data, buf.len);
+  int ret = write(context->addr->sd, buf.data, buf.len);  // 클라이언트로 돌려보낼 메시지 작성
   free(buf.data);
   if (ret == -1) {
     fprintf(stderr, "Could not write to client: %s\n",
@@ -56,7 +56,7 @@ void* client_handler(void *arg) {
   context.svc = calc_service_new();
   calc_service_ctor(context.svc);
 
-  context.write_resp = &stream_write_resp;
+  context.write_resp = &stream_write_resp;    //함수 포인터
 
   int ret;
   char buffer[128];
@@ -82,7 +82,7 @@ void* client_handler(void *arg) {
 }
 
 void accept_forever(int server_sd) {
-  while (1) {
+  while (1) {   // 새로운 클라이언트를 받아들일 때 실행되는 함수
     int client_sd = accept(server_sd, NULL, NULL);
     if (client_sd == -1) {
       close(server_sd);
@@ -94,7 +94,7 @@ void accept_forever(int server_sd) {
     int* arg = (int *)malloc(sizeof(int));
     *arg = client_sd;
     int result = pthread_create(&client_handler_thread, NULL,
-            &client_handler, arg);
+            &client_handler, arg);    // client_handler는 client_handler_thread의 동반자 함수이다. 
     if (result) {
       close(client_sd);
       close(server_sd);
