@@ -1,3 +1,9 @@
+/*
+다중 입출력
+poll() 사용 예제 
+
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <poll.h>

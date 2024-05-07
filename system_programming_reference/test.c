@@ -1,3 +1,8 @@
+/*
+test 용 코드
+
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>

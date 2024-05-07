@@ -1,3 +1,8 @@
+/*
+메모리에 파일 맵핑
+mmap() 예제
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

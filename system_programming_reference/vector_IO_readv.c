@@ -1,3 +1,9 @@
+/*
+벡터 입출력
+readv() 예제
+
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

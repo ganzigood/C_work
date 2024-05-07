@@ -1,3 +1,10 @@
+/*
+다중입출력
+select() 사용 예제
+*/
+
+
+
 #include <stdio.h>
 #include <sys/time.h>
 #include <sys/types.h>

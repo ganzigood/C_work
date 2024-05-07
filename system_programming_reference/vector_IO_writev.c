@@ -1,3 +1,8 @@
+/*
+벡터 입출력 
+writev() 예제
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

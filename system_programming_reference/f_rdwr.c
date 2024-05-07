@@ -1,3 +1,8 @@
+/*
+C 표준 입출력(바이너리 데이터 읽고 쓰기)
+fread(), fwrite() 예제.
+*/
+
 #include <stdio.h>
 
 int main(int argc, char** argv) {
