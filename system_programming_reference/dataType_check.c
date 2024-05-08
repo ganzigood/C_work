@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
 
     char* buf[] = {"aaaaaa","bbbbbb"};
 
+    printf("pid_t : %ld\n", sizeof(pid_t));
     printf("buf size : %ld\n", strlen(buf[0]));
     printf("__off_t size : %ld\n",sizeof(off_t));
     printf("off_t : %ld,  gg = %ld\n",sizeof(off_t), gg);
@@ -34,7 +35,10 @@ int main(int argc, char** argv) {
     printf("long : %ld\n", sizeof(long));
     printf("page size(long type, sysconf function) : %ld\n", sysconf(_SC_PAGESIZE));
     printf("page size(int type, getpagesize function) : %d\n", getpagesize());
-    printf("page size(int type, use PAGE_SIZE macro) : %ld\n\n", PAGE_SIZE);
+    printf("page size(int type, use PAGE_SIZE macro) : %ld\n", PAGE_SIZE);
+
+    printf("My pid = %d\n", getpid());
+    printf("Parent's pid = %d\n\n",getppid());    
 
     return 0;
 }
