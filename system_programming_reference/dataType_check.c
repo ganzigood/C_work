@@ -10,29 +10,24 @@ test 용 코드
 #include <string.h>
 
 int main(int argc, char** argv) {
-    printf("start\n");
-    printf("Hello World\n");
-    __off_t a;
-   
-    int b;
+
     size_t c;
-    off_t gg;
-    gg = 12;
-
+    off_t offset;
     char* buf[] = {"aaaaaa","bbbbbb"};
-
-    printf("pid_t : %ld\n", sizeof(pid_t));
+ 
+    printf("size of pid_t : %ld\n", sizeof(pid_t));
     printf("buf size : %ld\n", strlen(buf[0]));
-    printf("__off_t size : %ld\n",sizeof(off_t));
-    printf("off_t : %ld,  gg = %ld\n",sizeof(off_t), gg);
+    printf("off_t : %ld,  gg = %ld\n",sizeof(off_t), offset);
     printf("fpos_t : %ld\n", sizeof(fpos_t));
     printf("size_t : %ld\n", sizeof(size_t));
-    printf("ssize_t : %ld\n", sizeof(ssize_t));
+    printf("ssize_t : %ld\n\n", sizeof(ssize_t));
+    
     printf("long long : %ld\n", sizeof(long long));
     printf("long long int : %ld\n", sizeof(long long int));
     printf("float : %ld\n", sizeof(float));
     printf("double : %ld\n", sizeof(double));
-    printf("long : %ld\n", sizeof(long));
+    printf("long : %ld\n\n", sizeof(long));
+
     printf("page size(long type, sysconf function) : %ld\n", sysconf(_SC_PAGESIZE));
     printf("page size(int type, getpagesize function) : %d\n", getpagesize());
     printf("page size(int type, use PAGE_SIZE macro) : %ld\n", PAGE_SIZE);
@@ -40,5 +35,11 @@ int main(int argc, char** argv) {
     printf("My pid = %d\n", getpid());
     printf("Parent's pid = %d\n\n",getppid());    
 
+    printf("저장된 사용자 ID : %d\n\n", _POSIX_SAVED_IDS);
+    printf("uid : %d\n\n", getuid());
+
+
     return 0;
+
+
 }
