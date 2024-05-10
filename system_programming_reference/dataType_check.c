@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     size_t c;
     off_t offset;
     char* buf[] = {"aaaaaa","bbbbbb"};
- 
+
     printf("size of pid_t : %ld\n", sizeof(pid_t));
     printf("buf size : %ld\n", strlen(buf[0]));
     printf("off_t : %ld,  gg = %ld\n",sizeof(off_t), offset);
