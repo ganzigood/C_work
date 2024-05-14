@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
     printf("저장된 사용자 ID : %d\n\n", _POSIX_SAVED_IDS);
     printf("uid : %d\n\n", getuid());
 
+    printf("nice value = %d \n\n", nice(0));
 
     return 0;
 
