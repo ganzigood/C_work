@@ -40,6 +40,10 @@ int main(int argc, char** argv) {
 
     printf("nice value = %d \n\n", nice(0));
 
+    printf("current break point is %p\n\n", sbrk(0));
+
+    printf("_XOPEN_SOURCE(VERSION) : %d\n\n", _XOPEN_VERSION);
+
     return 0;
 
 
