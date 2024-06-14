@@ -1,5 +1,8 @@
 .vscode/
-.build/
+build/
+Debug/
+
 test.*
 *.o
 *.a
+test
