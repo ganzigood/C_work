@@ -95,7 +95,7 @@ int LNext(linked_list *mylist, int* data) {
     return True;
 }
 
-int LRemove(linked_list *mylist) {
+int RemoveAll(linked_list *mylist) {
     Node* delNode;
     int i;
     printf("삭제한 데이터 : ");
@@ -144,7 +144,7 @@ int main() {
 
     printf("\n");
 
-    LRemove(&mylist);
+    RemoveAll(&mylist);
 
     printf("\n");
 

@@ -78,7 +78,7 @@ int LNext(CLinkList *mylist, int* data) {
     return True;
 }
 
-int LRemoveAll(CLinkList *mylist) {
+int RemoveAll(CLinkList *mylist) {
     Node* delNode;
     int i;
     printf("삭제한 데이터 : ");
@@ -132,7 +132,7 @@ int main() {
 
     printf("\n");
 
-    LRemoveAll(&mylist);
+    RemoveAll(&mylist);
 
     printf("\n");
 
