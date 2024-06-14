@@ -110,9 +110,7 @@ void ChanePhoneNum(namecard* pcard, char* phone){
 
 int main(void) {
     namecard* newcard;
-    //printf("%p\n",newcard);
-    //printf("%p\n",&newcard);   // **newcard가 가리키는 값은 포인터 변수를 저장하기 위한 저장공간이다.
-
+ 
     arr_list mylist;
 
     init_arr_list(&mylist);
