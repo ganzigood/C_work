@@ -36,7 +36,7 @@ void ListInit(linked_list *mylist){
     mylist->head->next = NULL;
     mylist->NumOfData = 0;
 
-    mylist->Sort = True;
+    mylist->Sort = False;  // True 이면 오름차순, False 이면 내림차순
 }
 
 int ListInsert(linked_list *mylist, int data){
@@ -46,18 +46,19 @@ int ListInsert(linked_list *mylist, int data){
     if(mylist->NumOfData == 0){
         newNode->next = mylist->head->next;
         mylist->head->next= newNode;
+    
     } else if(mylist->NumOfData > 0) {
         mylist->before = mylist->head;
         mylist->cur = mylist->head->next;
-        if(data < mylist->cur->data) {
+        // 삼항연산자를 사용해서 mylist->Sort의 값에 따라서 오름차순과 내림차순을 설정한다.
+        if(mylist->Sort ? (data < mylist->cur->data) : (data > mylist->cur->data)) {
             newNode->next = mylist->head->next;
             mylist->head->next= newNode;
             (mylist->NumOfData)++;
             return True;
         }
-        mylist->before = mylist->head;
-        mylist->cur = mylist->head->next;
-        while(data > mylist->cur->data) {
+        // 삼항연산자를 사용해서 mylist->Sort의 값에 따라서 오름차순과 내림차순을 설정한다.
+        while(mylist->Sort ? (data > mylist->cur->data) : (data < mylist->cur->data)) {
             mylist->before = mylist->cur;
             mylist->cur = mylist->before->next;
             if(mylist->cur == NULL) {
