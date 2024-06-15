@@ -17,7 +17,7 @@ r과 f가 배열의 끝에 도달했을 때는 인덱스를 다시 0으로 조�
 #define True 1
 #define False 0
 
-#define Max_Len 4
+#define Max_Len 100  // 이 길이를 수정해서 원형 큐에 대한 검증을 할 수 있겟다.
 
 typedef struct __array_queue {
     int data[Max_Len];
