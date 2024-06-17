@@ -125,8 +125,5 @@ int main() {
     PrintTree(A,0,0);
     printf("\n");
 
-    printf("트리 전체 삭제(삭제된 노드 데이터) : ");
-    DelTree(A);
-
     return 0;
 }
