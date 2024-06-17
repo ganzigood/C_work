@@ -29,6 +29,16 @@ SBTree* MakeNode(char data){
     newNode->RNode = NULL;
 }
 
+int DelNode(SBTree* node) {
+    if(node->LNode !=NULL || node->RNode != NULL) {
+        printf("%c 노드는 자식 노드가 있습니다. 삭제할 수 없다.\n", node->data);
+        return False;
+    }
+    free(node);
+
+    return True;
+}
+
 void LinkLeftSide(SBTree* pNode, SBTree* cNode) {
     if(pNode->LNode != NULL) {
         SBTree* delNode;
@@ -88,14 +98,16 @@ void RearPrintTree(SBTree* rootNode) {
 
 }
 
-int DelNode(SBTree* node) {
-    if(node->LNode !=NULL || node->RNode != NULL) {
-        printf("%c 노드는 자식 노드가 있습니다. 삭제할 수 없다.\n", node->data);
-        return False;
+//후위 순회를 이용한 트리의 제거
+void DeleteTree(SBTree* rootNode) {
+    if(rootNode->LNode !=NULL){
+        DeleteTree(rootNode->LNode);
     }
-    free(node);
-
-    return True;
+    if(rootNode->RNode !=NULL) {
+        DeleteTree(rootNode->RNode);
+    }
+    printf("삭제할 노드의 데이터 : %c\n",rootNode->data);
+    free(rootNode);
 }
 
 int main() {
@@ -126,6 +138,10 @@ int main() {
 
     printf("노드삭제\n");
     DelNode(B);
+    printf("\n");
+    
+    printf("트리 제거\n");
+    DeleteTree(A);
 
     return 0;
 }
