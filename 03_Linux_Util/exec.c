@@ -6,15 +6,13 @@
 
 extern char **environ;
 
-static void
-die(char *msg)
+static void die(char *msg)
 {
     printf("--- %s error ---\n", msg);
     exit(1);
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     puts("<<execl>>");
     if (fork() != 0) {  /* parent */

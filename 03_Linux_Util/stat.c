@@ -6,8 +6,7 @@
 
 static char *filetype(mode_t mode);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     struct stat st;
 

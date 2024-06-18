@@ -3,8 +3,7 @@
 
 static void do_head(FILE *f, long nlines);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 2) {
         fprintf(stderr, "Usage: %s n\n", argv[0]);
@@ -14,8 +13,7 @@ main(int argc, char *argv[])
     exit(0);
 }
 
-static void
-do_head(FILE *f, long nlines)
+static void do_head(FILE *f, long nlines)
 {
     int c;
 

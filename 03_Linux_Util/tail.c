@@ -10,8 +10,7 @@
 
 static void tail(FILE *f);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 1) {
         fprintf(stderr, "Usage: %s < infile\n", argv[0]);
@@ -30,24 +29,20 @@ static char ring_buffer[N_LINES][MAX_LINE_LENGTH];
     } \
 } while (0)
 
-static void
-tail(FILE *f)
+static void tail(FILE *f)
 {
     long curr = 0;
     long n_read_lines = 0;
 
-    // Read all lines into ring buffer
     while (fgets(ring_buffer[curr], MAX_LINE_LENGTH, f)) {
         RING_BUFFER_INC(curr);
         n_read_lines++;
     }
 
-    // Rewind ring buffer
     if (n_read_lines < N_LINES) {
         curr = 0;
     }
 
-    // Flush ring buffer
     int n;
     for (n = N_LINES; n > 0 && n_read_lines; n--, n_read_lines--) {
         printf("%s", ring_buffer[curr]);

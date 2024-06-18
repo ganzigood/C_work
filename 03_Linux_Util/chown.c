@@ -11,8 +11,7 @@
 
 static uid_t get_user_id(char *user);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     uid_t uid;
     int i;
@@ -30,8 +29,7 @@ main(int argc, char *argv[])
     exit(1);
 }
 
-static uid_t
-get_user_id(char *user)
+static uid_t get_user_id(char *user)
 {
     struct passwd *pw;
 

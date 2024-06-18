@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     if (argc != 3) {
         fprintf(stderr, "%s: wrong number of arguments\n", argv[0]);

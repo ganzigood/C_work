@@ -5,8 +5,7 @@
 
 static void do_ls(char *path);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int i;
 
@@ -20,19 +19,18 @@ main(int argc, char *argv[])
     exit(0);
 }
 
-static void
-do_ls(char *path)
+static void do_ls(char *path)
 {
     DIR *d;
     struct dirent *ent;
 
-    d = opendir(path);          /* (1) */
+    d = opendir(path);          
     if (!d) {
         perror(path);
         exit(1);
     }
-    while (ent = readdir(d)) {  /* (2) */
+    while (ent = readdir(d)) { 
         printf("%s\n", ent->d_name);
     }
-    closedir(d);                /* (1') */
+    closedir(d);  
 }

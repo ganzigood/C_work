@@ -3,8 +3,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int i;
 

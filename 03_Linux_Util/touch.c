@@ -8,8 +8,7 @@
 #include <sys/types.h>
 #include <utime.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int i;
 

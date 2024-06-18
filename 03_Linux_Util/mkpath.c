@@ -8,8 +8,7 @@
 static void make_path(const char *path);
 static void die(const char *s);
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int i;
 
@@ -23,12 +22,7 @@ main(int argc, char *argv[])
     exit(0);
 }
 
-/*
-    "Check & Create" strategy may fail in multi-process environment,
-    we try to create a directory and check an error instead.
-*/
-static void
-make_path(const char *path)
+static void make_path(const char *path)
 {
     if (mkdir(path, 0777) == 0) {
         // Successfully created.  OK

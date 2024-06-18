@@ -3,8 +3,7 @@
 #include <unistd.h>
 #include <limits.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     char buf[PATH_MAX];
 
