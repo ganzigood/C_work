@@ -37,15 +37,19 @@ void* stack_service(client_context context) {
             fprintf(stderr,"read error\n");
             exit(1);
         }
-        write(context.client_addr,buffer,n);
+        send(context.client_addr, buffer, n, 0);
+        
+        //write(context.client_addr,buffer,n);
+        
+        recv(context.client_addr, buffer, strlen(buffer), 0);
 
+        /*
         ret = read(context.client_addr, buffer, strlen(buffer));
         if(ret == -1 || ret ==0) {
             break;
         }
-        
-        printf("\n"); 
-        write(STDOUT_FILENO, buffer, ret);
+        */
+        printf("\n asdf%s\n", buffer);  
         
         switch(buffer[0]) {
             case '1' :
@@ -54,7 +58,7 @@ void* stack_service(client_context context) {
 
                 ret = read(context.client_addr, buffer, strlen(buffer) );
                 
-                Push(&mystack,buf);
+                Push(&mystack,buffer);
                 
                 break;
             case '2' :

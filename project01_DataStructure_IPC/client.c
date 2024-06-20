@@ -27,19 +27,19 @@ void stream_client_loop(int conn_sd) {
     server_context context;
     context.server_addr = conn_sd;
     
-    char rebuffer[MAX_BUF];
-    char sebuffer[MAX_BUF];
+    char buffer[MAX_BUF];
     while (1) {
-        int n = read(context.server_addr, rebuffer, sizeof(rebuffer));
+        int n = read(context.server_addr, buffer, sizeof(buffer));
         if (n <=0){
             fprintf(stderr,"read error\n");
             break;
         }
-        write(STDOUT_FILENO, rebuffer, n);    
+        write(STDOUT_FILENO, buffer, n);    
+        
+        
+        scanf(" %s", buffer);
 
-        scanf(" %s", sebuffer);
-
-        int ret = write(context.server_addr, sebuffer, strlen(sebuffer));
+        int ret = write(context.server_addr, buffer, strlen(buffer));
         if (ret == -1) {
             fprintf(stderr, "Error while writing! %s\n",
             strerror(errno));
