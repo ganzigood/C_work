@@ -49,8 +49,10 @@ void* stack_service(client_context context) {
             break;
         }
         */
-        printf("\n asdf%s\n", buffer);  
-        
+        printf("\n asdf\n%s", buffer);  
+        printf("\n");
+
+        printf("%c", buffer[0]);
         switch(buffer[0]) {
             case '1' :
                 strcpy(buffer,"스택에 입력할 정수형 데이터를 입력하세요 : ");
@@ -58,16 +60,18 @@ void* stack_service(client_context context) {
 
                 ret = read(context.client_addr, buffer, strlen(buffer) );
                 
+                printf("\n 스택에 들어감\n%s", buffer);  
+                printf("\n");
+
                 Push(&mystack,buffer);
                 
                 break;
             case '2' :
-                buf = Peek(&mystack);
+                printf("\n\n case 2 입장 \n\n");
                 
-                fprintf(stdout,"%s",buf);
-
+                buf = Peek(&mystack);
+                printf("%s",buf);
                 write(context.client_addr, buf, strlen(buf));
-
                 break;
             case '3' :
                 break;
