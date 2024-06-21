@@ -10,7 +10,16 @@ void Bubble_Sort(int* dataset, int length) {
     int i,j, temp;
 
 
-   
+    // 배열이 정렬이 된 상태인 경우 불필요한 비교를 수행하지 않도록 한다.
+    for(i=0; i<length-1; i++) {
+        if(dataset[i]>dataset[i+1]) {
+            break;
+        } else {
+            printf("이미 정렬된 상태\n");
+            return;
+        }
+    }
+
     for(i = 0; i<length-1; i++) {
         for(j=0; j<length-(i+1); j++){
             if(dataset[j]>dataset[j+1]) {
