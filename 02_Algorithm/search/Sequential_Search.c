@@ -9,12 +9,14 @@
 
 */
 
-// 링크드 리스크에 순차탐색 기능을 추가
 
 /*
+링크드 리스트 설명
+
 head에 데이터를 추가한다.
+
 리스트의 맨 앞에 Dummy Node를 추가하고, 두 번째 노드부터 유효한 데이터가 되도록 하겠다.
-head -> dummy -> data1 -> data2 -> data3
+ex) head -> dummy -> data1 -> data2 -> data3
 
 cur는 data1, before는 dummy를 기본으로 가르킨다.
 */
@@ -111,11 +113,9 @@ Node* LSearch(linked_list *mylist, int findData) {
 
     return False;
 }
-
 int LCount(linked_list *mylist) {
     return mylist->NumOfData;
 }
-
 
 int main() {
     int data=0;
