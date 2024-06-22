@@ -36,7 +36,7 @@ typedef struct __linked_list
 {
     Node *head;
     Node *before;
-    Node *transposeCur;
+    Node *transposeCur;  // 전위법을 구현하기 위해서 추가. 탐색 대상의 위치를 바꾸기 전에   before - cur / 상태에서 transposeCur - before -cur 순으로 포인터를 배치한다.
     Node *cur;
     int NumOfData;
     //int (*comp)(int d1, int d2);
