@@ -7,6 +7,11 @@
 - 정렬되지 않은 데이타에서 원하는 항목을 찾을 유일한 방법
 - 간단해서 버그를 만들 가능성이 적다.
 
+자기 구성 순차 탐색
+    - 전진 이동법(Move To Front Method)
+    - 전위법(Transpose Method)
+    - 빈도 계수법(Frequency Count Method)
+    
 */
 
 
@@ -98,7 +103,7 @@ int LRemove(linked_list *mylist) {
 }
 
 // 순차탐색 기능 추가 - 데이터가 있으면 해당 데이터를 가진 노드를 반환
-Node* LSearch(linked_list *mylist, int findData) {
+Node* SequentialSearch(linked_list *mylist, int findData) {
     int data;
     if(LFirst(mylist, &data)) {
         if(findData==data) {
@@ -131,7 +136,7 @@ int main() {
     ListInsert(&mylist, 7);
     ListInsert(&mylist, 6);
    
-    printf("입력된 데이터 출력 : \n");
+    printf("입력된 데이터 출력 : ");
 
     
     if(LFirst(&mylist, &data)) printf(" %d ",data);
@@ -139,16 +144,19 @@ int main() {
         printf("%d ",data);
     }
     printf("\n");
+
     // 순차 탐색 - 데이타가 2인 노드를 찾는다.
+    printf("\n");
+    printf("== 순차 탐색 실행 ==\n");
     Node* findNode;
-    if (findNode = LSearch(&mylist, 12)) {
-        printf("찾는 노드가 있다. 노드의 데이터 : %d ", findNode->data);
+    if (findNode = SequentialSearch(&mylist, 12)) {
+        printf("찾는 노드가 있다. 노드의 데이터 : %d\n", findNode->data);
     } else {
         printf("찾는 노드가 없다.\n");
     }
 
-    if (findNode = LSearch(&mylist, 2)) {
-        printf("찾는 노드가 있다. 노드의 데이터 : %d ", findNode->data);
+    if (findNode = SequentialSearch(&mylist, 2)) {
+        printf("찾는 노드가 있다. 노드의 데이터 : %d \n", findNode->data);
     } else {
         printf("찾는 노드가 없다.\n");
     }

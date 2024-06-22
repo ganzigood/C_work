@@ -1,12 +1,13 @@
 /*
-자기 구성 순차 탐색
+자기 구성 순차 탐색 
 
-전진 이동법(Move to Front Method)
+전위법(Transpose)
 
-탐색된 항목을 데이터의 가장 앞(링크드 리스트의 헤드)으로 옮기는 방법(ex. word나 기타 파일, 문서 파일을 수정 편집하는 소프트웨어의 최근 문서 목록 기능 같은 것)
+순차 탐색에서 전위법은 탐색된 항목을 바로 이전 항목과 교환하는 전략을 취하는 알고리즘
 
-한 번 탐색된 항목이 다음에 또 다시 검색될 가능성이 높은 데이터에 한해 사용할 수 있다.
+전진 이동법(Move to Front Method)는 검색된 항목을 무조건 앞으로 옮기는 것에 비해, 전위법은 자주 탐색된 항목을 조금씩 앞으로 옮긴다.
 */
+
 
 /*
 링크드 리스트 설명
@@ -35,6 +36,7 @@ typedef struct __linked_list
 {
     Node *head;
     Node *before;
+    Node *transposeCur;
     Node *cur;
     int NumOfData;
     //int (*comp)(int d1, int d2);
@@ -131,6 +133,28 @@ Node* MovetoFrontMethod(linked_list *mylist, int findData) {
     }
 }
 
+
+// 전위법 탐색 기능 추가 - 순차 탐색 후 해당 데이터를 앞으로 한칸 이동.
+Node* TransposeSearch(linked_list *mylist, int findData) {
+    Node* findNode;
+
+    if(findNode = SequentialSearch(mylist, findData)) {
+        if(mylist->cur == mylist->head->next) {
+            return findNode;
+        } else {
+            mylist->transposeCur = mylist->head;
+            while(mylist->transposeCur->next != mylist->before) {
+                mylist->transposeCur = mylist->transposeCur->next;
+            }
+            mylist->before->next = mylist->cur->next;
+            mylist->cur->next= mylist->before;
+            mylist->transposeCur->next = mylist->cur;
+            return findNode;
+        }
+    }
+    return False;
+}
+
 int LCount(linked_list *mylist) {
     return mylist->NumOfData;
 }
@@ -175,6 +199,7 @@ int main() {
 
     printf("\n");
 
+    // 전진 이동 탐색 실행
     printf("== 전진 이동 탐색 실행(Move to Front Method) ==\n");
     if (findNode = MovetoFrontMethod(&mylist, 123)) {
         printf("전진 이동 탐색 : 찾는 노드가 있다. 노드의 데이터 : %d\n", findNode->data);
@@ -196,7 +221,32 @@ int main() {
         printf("%d ",data);
     }
     
+    printf("\n\n");
+
+    // 전위법 실행
+    printf("== 전위법 실행(Transpose) ==\n");
+    if (findNode = TransposeSearch(&mylist, 123)) {
+        printf("전위법 탐색 : 찾는 노드가 있다. 노드의 데이터 : %d\n", findNode->data);
+    } else {
+        printf("전위법 탐색 : 찾는 노드가 없다.\n");
+    }
+
+    if (findNode = TransposeSearch(&mylist, 5)) {
+        printf("전위법 탐색 : 찾는 노드가 있다. 노드의 데이터 : %d\n", findNode->data);
+    } else {
+        printf("전위법 탐색 : 찾는 노드가 없다.\n");
+    }
+    
     printf("\n");
+    printf("전위법 탐색 이후 데이터 출력 : ");
+
+    if(LFirst(&mylist, &data)) printf("%d ",data);
+    while(LNext(&mylist, &data)) {
+        printf("%d ",data);
+    }
+
+    printf("\n\n");
+    printf("== 메모리 해제 ==\n");
     LRemove(&mylist);
 
 
