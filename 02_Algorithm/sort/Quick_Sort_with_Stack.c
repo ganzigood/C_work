@@ -113,8 +113,6 @@ void Quick_Sort(int* dataSet, int left, int right) {
             factor = dataSet[left];
         }
 
-        
-
         while(dataSet[i]<factor) {
             i++;
             if(i>=j) break;
@@ -123,7 +121,6 @@ void Quick_Sort(int* dataSet, int left, int right) {
         while(dataSet[j]>factor){
             if(i>=j) break;
             j--;
-            
         }
         if(i>=j) {
             index=i-1;

@@ -1,12 +1,18 @@
 /*
+- 퀵 정렬 -
+
+분할 정복에 바탕을 둔 알고리즘
+퀵 정렬의 알고리즘을 한마디로 요약하면 기준 요소 선정 및 분할의 반복이다.
 '좋은' 기준 요소를 선정하는 것이 성능개선에 도움이 된다. 분할영역의 왼쪽 끝 값을 기준 요소로 정렬하겠다.
 
 */
 
 
+
 #include<stdio.h>
 
-void Quick_Sort(int* dataSet, int left, int right) {
+
+int Find_Partition(int* dataSet, int left, int right) {
     
     //기준 요소를 분할 영역의 가장 왼쪽 값으로 해보겠다.
     
@@ -17,42 +23,37 @@ void Quick_Sort(int* dataSet, int left, int right) {
     int j = right;
 
     while(i<=j) {
-        while(dataSet[i]<factor) {
-            i++;
-            if(i==j) break;
+        while(dataSet[i]<=factor && i<j) {
+            ++i;
         }
 
-        while(dataSet[j]>factor){
-            j--;
-            if(i==j) break;
+        while(dataSet[j]>=factor && i<=j){
+            --j;
         }
-        if(i>=j) {
-            index=i-1;
-            temp = dataSet[i-1];
-            dataSet[i-1] = dataSet[left];
-            dataSet[left] = temp;
-            break;
-        }
-        temp = dataSet[i];
-        dataSet[i] = dataSet[j];
-        dataSet[j] = temp;
-        if(i == j-1){
-            index=i;
+
+        if(i<j) {   
             temp = dataSet[i];
-            dataSet[i] = dataSet[left];
-            dataSet[left] = temp;
+            dataSet[i] = dataSet[j];
+            dataSet[j] = temp;
+        } else {
             break;
         }
-        i++;
-        j--;
     }
     
-
+    temp = dataSet[j];
+    dataSet[j] = dataSet[left];
+    dataSet[left] = temp;
+    return j;
+}
+void QuickSort(int* dataSet, int left, int right) {
     if(left<right) {
-        Quick_Sort(dataSet,left,index-1);
-        Quick_Sort(dataSet,index+1,right);
+        int index = Find_Partition(dataSet, left, right);
+        QuickSort(dataSet,left,index-1);
+        QuickSort(dataSet,index+1,right);
     }
 }
+
+    
 
 int main() {
     int dataSet[] = {5,1,6,4,8,3,7,9,2};
@@ -65,7 +66,7 @@ int main() {
 
     int left = 0;
     int right = length-1;
-    Quick_Sort(dataSet,left,right);
+    QuickSort(dataSet,left,right);
 
     for(int i=0; i<length; i++) {
         printf("%d ",dataSet[i]);
