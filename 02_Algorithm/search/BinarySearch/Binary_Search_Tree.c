@@ -103,40 +103,45 @@ BSTree* DeleteNode(BSTree* Node, BSTree* PNode, int data) {
     }
 
     if(data < Node->data) {
-        DeleteNode(Node->LNode, Node, data);
+        delNode = DeleteNode(Node->LNode, Node, data);
     } else if(data > Node->data) {
-        DeleteNode(Node->RNode, Node, data);
+        delNode = DeleteNode(Node->RNode, Node, data);
     } else {
         delNode = Node;
 
-        if(delNode->LNode == NULL && delNode->RNode == NULL) {
-            free(delNode);
+        if(Node->LNode == NULL && Node->RNode == NULL) {
+            
+            if(PNode->LNode = Node) {
+                PNode->LNode = NULL;
+            } else {
+                PNode->RNode = NULL;
+            }
         } else { 
-            if(delNode->LNode !=NULL && delNode->RNode !=NULL) {
-                minNode = FindMinNode(delNode->RNode);
-                DeleteNode(delNode,NULL, minNode->data);
+            if(Node->LNode !=NULL && Node->RNode !=NULL) {
+                minNode = FindMinNode(Node->RNode);
+                DeleteNode(Node,NULL, minNode->data);
                 Node->data=minNode->data;
             } else {
-                if(delNode->LNode != NULL) {
-                    temp = delNode->LNode;
+                if(Node->LNode != NULL) {
+                    temp = Node->LNode;
+                    
                 } else{
-                    temp = delNode->RNode;
+                    temp = Node->RNode;
                 }
-                if(PNode->LNode == delNode){
+                if(PNode->LNode == Node){
                     PNode->LNode = temp;
                 } else {
                     PNode->RNode = temp;
                 }
             }
         }
-
     }
-    
+    return delNode;
 }
 
 
 // === travers === //
-//전위순회
+//전위순회(Preorder)
 void pre_travers(BSTree* Node) {
     printf(" %d ", Node->data);
     
@@ -144,7 +149,7 @@ void pre_travers(BSTree* Node) {
 
     if(Node->RNode != NULL) pre_travers(Node->RNode);
 }
-//중위순회
+//중위순회(Inorder)
 void mid_travers(BSTree* Node) {
     if(Node->LNode != NULL) mid_travers(Node->LNode);
 
@@ -152,13 +157,22 @@ void mid_travers(BSTree* Node) {
 
     if(Node->RNode != NULL) mid_travers(Node->RNode);
 }
-//후위순회
+//후위순회(Postorder)
 void back_travers(BSTree* Node) {
     if(Node->LNode != NULL) back_travers(Node->LNode);
 
     if(Node->RNode != NULL) back_travers(Node->RNode);
 
     printf(" %d ", Node->data);
+}
+
+void DestroyTree(BSTree* Node) {
+    if(Node->LNode != NULL) DestroyTree(Node->LNode);
+
+    if(Node->RNode != NULL) DestroyTree(Node->RNode);
+
+    printf(" %d ", Node->data);
+    free(Node);
 }
 
 
@@ -212,14 +226,15 @@ int main() {
 
     printf("\n=== 이진 탐색 트리의 노드 삭제 ===\n");
     int data =1111;
-    if(DeleteNode(rootNode, NULL, data) == NULL) {
+    BSTree* delNode;
+    if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
         printf("%d - 해당 노드가 존재하지 않는다.\n", data);
     } else {
         printf("%d 노드 삭제",data);
     }
     
     data =11;
-    if(DeleteNode(rootNode, NULL, data) == NULL) {
+    if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
         printf("%d - 해당 노드가 존재하지 않는다.\n", data);
     } else {
         printf("%d 노드 삭제",data);
@@ -227,6 +242,10 @@ int main() {
 
     printf("\n후위순회 : ");
     back_travers(rootNode);
+
+    printf("\n\n메모리 해제 : ");
+    DestroyTree(rootNode);
+    printf("\n");
 
     return 0;
 }
