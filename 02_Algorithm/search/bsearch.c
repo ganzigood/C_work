@@ -1,4 +1,9 @@
 /*
+C 라이브러리의 이진 탐색을 구현한 bsearch()를 사용.
+
+*/
+
+/*
 이진 탐색
 
 정렬된 데이터에서 사용할 수 있는 '고속' 탐색 알고리즘이다. 
@@ -10,6 +15,7 @@ sort 기능이 추가된 링크드 리스트에 이진 탐색 기능을 추가�
 
 
 #include<stdio.h>
+#include<stdlib.h>
 
 #define True 1;
 #define False 0;
@@ -55,24 +61,19 @@ void QuickSort(int* dataSet, int left, int right) {
     }
 }
 
-int BinarySearch(int* dataSet, int length, int findData) {
+int compare(void* n1, void* n2) {
+    int* num1 = (int*)n1;
+    int* num2 = (int*)n2;
     
-    int center, left, right;
-    left =0;
-    right = length;
-
-    while(left <= right) {
-
-        center = (left+right) /2;
-        
-        if(dataSet[center] == findData) return center;
-        else if(dataSet[center] > findData) right=center-1;
-        else left = center+1;
+    if(*num1 > *num2) {
+        return 1;
+    } else if (*num1 < *num2 ){
+        return -1;
+    } else {
+        return 0;
     }
-    
-    return -1;
-
 }
+
 
 int main() {
     int dataSet[] = {871,1,672,7,139,11,67,12,23,14,759,3};
@@ -95,14 +96,11 @@ int main() {
     }
     printf("\n");
 
-    printf("== 이진탐색 실행 ==\n");
-    int findIndex;
-    if((findIndex = BinarySearch(dataSet, length-1, 1211)) >= 0) {
-        printf("이진탐색 ... 데이타가 있다. %d\n", dataSet[findIndex]);
-    } else {
-        printf("이진탐색 ... 찾는 데이터가 없다.\n");
-    }
-    
+    printf("== 이진탐색 bsearch() 실행 ==\n");
+    int data = 759;
+    int* findData;
+    findData = bsearch(&data ,dataSet,12,sizeof(int),compare);    
+    printf("찾는 데이터는 : ... %d\n", *findData);
 
     return 0;
 }
