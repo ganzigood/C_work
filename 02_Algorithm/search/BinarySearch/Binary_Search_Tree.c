@@ -95,9 +95,7 @@ BSTree* FindMinNode(BSTree* Node) {
 
 BSTree* DeleteNode(BSTree* Node, BSTree* PNode, int data) {
     BSTree* delNode=NULL;
-    BSTree* temp=NULL;
-    BSTree* minNode=NULL;
-
+    
     if(Node == NULL) {
         return NULL;
     }
@@ -111,20 +109,22 @@ BSTree* DeleteNode(BSTree* Node, BSTree* PNode, int data) {
 
         if(Node->LNode == NULL && Node->RNode == NULL) {
             
-            if(PNode->LNode = Node) {
+            if(PNode->LNode == Node) {
                 PNode->LNode = NULL;
             } else {
                 PNode->RNode = NULL;
             }
+
         } else { 
             if(Node->LNode !=NULL && Node->RNode !=NULL) {
+                BSTree* minNode;
                 minNode = FindMinNode(Node->RNode);
-                DeleteNode(Node,NULL, minNode->data);
+                delNode = DeleteNode(Node,NULL, minNode->data);
                 Node->data=minNode->data;
             } else {
+                BSTree* temp=NULL;
                 if(Node->LNode != NULL) {
                     temp = Node->LNode;
-                    
                 } else{
                     temp = Node->RNode;
                 }
@@ -133,6 +133,7 @@ BSTree* DeleteNode(BSTree* Node, BSTree* PNode, int data) {
                 } else {
                     PNode->RNode = temp;
                 }
+                
             }
         }
     }
@@ -175,6 +176,9 @@ void DestroyTree(BSTree* Node) {
     free(Node);
 }
 
+void DestroyNode(BSTree* Node) {
+    free(Node);
+}
 
 
 
@@ -230,14 +234,24 @@ int main() {
     if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
         printf("%d - 해당 노드가 존재하지 않는다.\n", data);
     } else {
-        printf("%d 노드 삭제",data);
+        printf("%d 노드 삭제\n",data);
+        DestroyNode(delNode);
     }
     
     data =11;
     if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
         printf("%d - 해당 노드가 존재하지 않는다.\n", data);
     } else {
-        printf("%d 노드 삭제",data);
+        printf("%d 노드 삭제\n",data);
+        DestroyNode(delNode);
+    }
+
+    data =15;
+    if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
+        printf("%d - 해당 노드가 존재하지 않는다.\n", data);
+    } else {
+        printf("%d 노드 삭제\n",data);
+        DestroyNode(delNode);
     }
 
     printf("\n후위순회 : ");
