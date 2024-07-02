@@ -246,7 +246,9 @@ int main() {
         DestroyNode(delNode);
     }
 
-    data =15;
+
+    printf("\n===루트 노드 삭제 테스트===\n");
+    data =23;
     if((delNode =DeleteNode(rootNode, NULL, data)) == NULL) {
         printf("%d - 해당 노드가 존재하지 않는다.\n", data);
     } else {

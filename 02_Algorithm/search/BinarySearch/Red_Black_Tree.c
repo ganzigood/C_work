@@ -1,3 +1,5 @@
+/// 나중에 다시 도전 하는...
+
 /*
 이진 탐색 트리는 트리가 기형적으로 성장하면 검색 효율이 극단적으로 떨어진다.
 데이터가 아무리 많이 입력되어도 이진 탐색 트리가 균형 있게 성장해서 그 높이가 최소한으로 유지 될 수 있도록 하는 자료구조가 레드 블랙 트리이다.
@@ -68,9 +70,9 @@
 typedef int Element;
 
 typedef struct __rbtnode {
-    struct __rbtode* Parent;
-    struct __rbtode* Left;
-    struct __rbtode* Right;
+    struct __rbtnode* Parent;
+    struct __rbtnode* Left;
+    struct __rbtnode* Right;
     
     enum{Red, Black} Color;
 
@@ -274,18 +276,114 @@ void Insert_Node(rbtnode** rootNode, Element newData){
     Insert_After_Rebuild(rootNode, newNode);
 }
 
+rbtnode* FindMinNode(rbtnode* Node) {
+    rbtnode* minNode = Node;
+    while(minNode->Left != NULL) {
+        minNode=minNode->Left;
+    }
+    return minNode;
+}
+
+
+/*
+// 노드를 제거하는 기본 함수!
+void Delete_Node(rbtnode* Node, rbtnode* PNode, Element delData){
+    rbtnode* delNode;
+
+    if(Node == NULL) {
+        return NULL;
+    }
+
+    if(delData < Node->data) {
+        delNode = DeleteNode(Node->Left, Node, delData);
+    } else if(delData > Node->data) {
+        delNode = DeleteNode(Node->Right, Node, delData);
+    } else {
+        delNode = Node;
+
+        if(Node->Left == NIL && Node->Right == NIL) {
+            if(PNode->Left == Node) {
+                PNode->Left = NIL;
+            } else {
+                PNode->Right = NIL;
+            }
+
+        } else { 
+            if(Node->Left !=NULL && Node->Right !=NULL) {
+                rbtnode* minNode;
+                minNode = FindMinNode(Node->Right);
+                delNode = DeleteNode(Node,NULL, minNode->data);
+                Node->data=minNode->data;
+            } else {
+                rbtnode* temp=NULL;
+                if(Node->Left != NULL) {
+                    temp = Node->Left;
+                } else{
+                    temp = Node->Right;
+                }
+                if(PNode->Left == Node){
+                    PNode->Left = temp;
+                } else {
+                    PNode->Right = temp;
+                }
+                
+            }
+        }
+    }
+}
+*/
+
+void Delete_After_Rebuild(rbtnode* doubleBNode) {
+
+}
 
 
 // 노드를 제거하는 기본 함수!
-void Delete_Node(rbtnode** rootNode, Element delData){
-    rbtnode* delNode = FindNode(*rootNode, delData);
+rbtnode* Delete_Node(rbtnode* Node, Element delData){
+    rbtnode* delNode;
 
-    Delete_Node_Helper(rootNode, delNode);
+    if(Node == NULL) {
+        return NULL;
+    }
 
+    if(delData < Node->data) {
+        delNode = DeleteNode(Node->Left, Node, delData);
+    } else if(delData > Node->data) {
+        delNode = DeleteNode(Node->Right, Node, delData);
+    } else {
+        delNode = Node;
+        if(Node->Left == NIL && Node->Right == NIL) {
+            if(Node->Parent->Left == Node) {
+                Node->Parent->Left = NIL;
+            } else {
+                Node->Parent->Right = NIL;
+            }
+        } else { 
+            if(Node->Left !=NULL && Node->Right !=NULL) {
+                rbtnode* minNode;
+                minNode = FindMinNode(Node->Right);
+                delNode = DeleteNode(Node, minNode->data);
+                Node->data=minNode->data;
+            } else {
+                rbtnode* temp=NULL;
+                if(Node->Left != NULL) {
+                    temp = Node->Left;
+                } else{
+                    temp = Node->Right;
+                }
+                if(Node->Parent->Left == Node){
+                    Node->Parent->Left = temp;
+                } else {
+                    Node->Parent->Right = temp;
+                }
+                
+            }
+        } 
+    }
+    if(delNode->Color == Black) {
+        Delete_After_Rebuild(delNode);
+    }
 
-
-
-    (*rootNode)->Color = Black;
 }
 
 
