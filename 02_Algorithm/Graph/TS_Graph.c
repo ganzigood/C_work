@@ -34,13 +34,34 @@ typedef struct _graph {
 
 typedef struct _listnode {
     ElementData data;
-    struct _linkedlist* next;
+    struct _listnode* next;
 }listNode;
 
 typedef struct _linkedlist {
     listNode* head;
     listNode* cur;
 }linkedList;
+
+linkedList* CreateList() {
+    linkedList* list = (linkedList*)malloc(sizeof(linkedList));
+    list->head = NULL;
+    list->cur = list->head;
+    return list;
+}
+
+listNode* CreateNode(ElementData data) {
+    listNode* node = (listNode*)malloc(sizeof(listNode));
+    node->data = data;
+    node->next = NULL;
+
+    return node;
+}
+
+void InsertList(linkedList* list, listNode* node) {
+    node->next = list->head;
+    list->head = node;
+    list->cur = list->head;
+}
 
 // ====================================
 
@@ -168,8 +189,37 @@ void DFS(vertex* v) {
 
         eCur = eCur->next;
     }
-
 }
+
+// ==== 위상정렬 Topological Sort ==== 
+
+void TS_DFS(vertex* v, linkedList** list) {
+    edge* eCur = NULL;
+    
+    v->visited = Visited;
+
+    eCur = v->adjList;
+
+    while(eCur != NULL) {
+        if(eCur->to != NULL && eCur->to->visited != Visited) {
+            TS_DFS(eCur->to, list);
+        }
+        eCur= eCur->next;
+    }
+
+    printf("%c ", v->data);
+
+    InsertList(*list,CreateNode(v->data));
+}
+
+void TSort(vertex* v, linkedList** list) {
+    
+    while(v !=NULL && v->visited == NotVisit) {
+        TS_DFS(v, list);
+        v = v->next;
+    }
+}
+
 
 int main() {
     graph* graph = CreateGraph();
@@ -215,12 +265,31 @@ int main() {
 
     PrintGraph(graph);
     printf("\n");
+
     printf("A정점부터의 깊이 우선 탐색 : ");
     DFS(A);
     printf("\n");
+
     Visit_Reset(graph);
+    
     printf("B정점부터의 깊이 우선 탐색 : ");
     DFS(B);
+    printf("\n");
+
+    Visit_Reset(graph);
+    printf("\n");
+
+    printf("=== 위상정렬 ===\n");
+    linkedList* mylist;
+    mylist = CreateList();
+    TSort(A, &mylist);
+
+    printf("\nTopological sort result : ");
+    mylist->cur = mylist->head;
+    while(mylist->cur != NULL) {
+        printf("%c ",mylist->cur->data);
+        mylist->cur = mylist->cur->next;
+    }
 
     return 0;
 }
